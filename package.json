@@ -1,7 +1,9 @@
 {
-  "name": "clean-next",
-  "version": "0.1.0",
+  "name": "next-demand",
+  "version": "1.0.0",
+  "description": "NextJS Landing Page generator for Demand Tests",
   "private": true,
+  "author": "Marko Jak <marko@markojak.com>",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
