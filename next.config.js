@@ -22,9 +22,9 @@ module.exports = withPlugins(
       apiBaseUrl: false ? 'http://localhost:1337' : 'https://zf.mime.ai',
       s3Prefix: 'https://xy.s3.eu-central-1.amazonaws.com/',
       revalidate: 600,
-      gtmCode: 'GTM-xy', // Google Tag Manager Code.
-      gaCode: 'G-xy', // Google Analytics Code.
-      gSiteVer: 'xy' // Content for Google Site Verification meta tag.
+      gtmCode: 'GTM-NP7RQ5N', // Google Tag Manager Code.
+      gaCode: 'G-KEV1GF964G', // Google Analytics Code.
+      gSiteVer: 'sgok4LsDHBrwvBbgPOjcMmgneKf6dzI2Xgt1Dz_0iC4' // Content for Google Site Verification meta tag.
     }
   }
 );
