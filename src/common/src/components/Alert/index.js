@@ -32,7 +32,7 @@ Alert.propTypes = {
 
   /** Used to render icon, button, text or any elements inside the Alert.
    * This can be a string or any component. */
-  children: PropTypes.element,
+  children: PropTypes.element
 };
 
 Alert.defaultProps = {};
