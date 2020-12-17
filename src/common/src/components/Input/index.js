@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import InputField, { EyeButton } from './input.style';
 const Input = ({
@@ -20,14 +20,21 @@ const Input = ({
   const [state, setState] = useState({
     toggle: false,
     focus: false,
-    value: '',
+    value: !!value ? value : ''
   });
+
+  useEffect(() => {
+    setState({
+      ...state,
+      value: value
+    });
+  }, [value]);
 
   // toggle function
   const handleToggle = () => {
     setState({
       ...state,
-      toggle: !state.toggle,
+      toggle: !state.toggle
     });
   };
 
@@ -35,7 +42,7 @@ const Input = ({
   const handleOnFocus = (event) => {
     setState({
       ...state,
-      focus: true,
+      focus: true
     });
     onFocus(event);
   };
@@ -44,7 +51,7 @@ const Input = ({
   const handleOnBlur = (event) => {
     setState({
       ...state,
-      focus: false,
+      focus: false
     });
     onBlur(event);
   };
@@ -53,7 +60,7 @@ const Input = ({
   const handleOnChange = (event) => {
     setState({
       ...state,
-      value: event.target.value,
+      value: event.target.value
     });
     onChange(event.target.value);
   };
@@ -68,7 +75,7 @@ const Input = ({
   };
 
   // init variable
-  let inputElement, htmlFor;
+  let inputElement, htmlFor, name;
 
   // Add all classs to an array
   const addAllClasses = ['reusecore__input'];
@@ -92,6 +99,9 @@ const Input = ({
   if (label) {
     htmlFor = label.replace(/\s+/g, '_').toLowerCase();
   }
+  if (props.name) {
+    name = props.name;
+  }
 
   // Label position
   const LabelPosition = isMaterial === true ? 'bottom' : 'top';
@@ -106,7 +116,6 @@ const Input = ({
         <textarea
           {...props}
           id={htmlFor}
-          name={htmlFor}
           value={state.value}
           onChange={handleOnChange}
           onBlur={handleOnBlur}
@@ -121,7 +130,7 @@ const Input = ({
           <input
             {...props}
             id={htmlFor}
-            name={htmlFor}
+            name={name}
             type={state.toggle ? 'password' : 'text'}
             value={state.value}
             onChange={handleOnChange}
@@ -146,7 +155,7 @@ const Input = ({
           <input
             {...props}
             id={htmlFor}
-            name={htmlFor}
+            name={name}
             type={inputType}
             value={state.value}
             onChange={handleOnChange}
@@ -179,7 +188,7 @@ Input.propTypes = {
   label: PropTypes.string,
 
   /** The input value, required for a controlled component. */
-  value: PropTypes.oneOf(['string', 'number']),
+  value: PropTypes.string,
 
   /** Make default input into material style input. */
   isMaterial: PropTypes.bool,
@@ -193,7 +202,7 @@ Input.propTypes = {
     'email',
     'password',
     'number',
-    'textarea',
+    'textarea'
   ]),
 
   /** Add icon in input field. This prop will not work with password
@@ -220,7 +229,7 @@ Input.propTypes = {
    * @param {object} event The event source of the callback.
    * You can pull out the new value by accessing `event.target.value`.
    */
-  onChange: PropTypes.func,
+  onChange: PropTypes.func
 };
 
 /** Inout default type. */
@@ -230,7 +239,7 @@ Input.defaultProps = {
   iconPosition: 'left',
   onBlur: () => {},
   onFocus: () => {},
-  onChange: () => {},
+  onChange: () => {}
 };
 
 export default Input;
