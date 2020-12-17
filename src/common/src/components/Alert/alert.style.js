@@ -26,6 +26,11 @@ const AlertStyle = styled.div`
       0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
   }
 
+  &.is-success {
+    background-color: ${themeGet('colors.primary', '#10ac84')};
+    color: ${themeGet('colors.white', '#ffffff')};
+  }
+
   /* Style system custome color variant */
   ${colorStyle}
   ${base}
@@ -33,7 +38,7 @@ const AlertStyle = styled.div`
 
 // prop types can also be added from the style functions
 AlertStyle.propTypes = {
-  ...variant.propTypes,
+  ...variant.propTypes
 };
 
 AlertStyle.displayName = 'AlertStyle';

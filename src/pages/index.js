@@ -14,11 +14,11 @@ import BlogSection from '../containers/Agency/BlogSection';
 import TestimonialSection from '../containers/Agency/TestimonialSection';
 import TeamSection from '../containers/Agency/TeamSection';
 import VideoSection from '../containers/Agency/VideoSection';
-import NewsletterSection from '../containers/Agency/NewsletterSection';
 import QualitySection from '../containers/Agency/QualitySection';
 import Footer from '../containers/Agency/Footer';
 import { DrawerProvider } from '../common/src/contexts/DrawerContext';
 import FaqSection from '../containers/Agency/FaqSection';
+import FormSection from '../containers/Agency/FormSection';
 
 export default function HomePage() {
   return (
@@ -55,7 +55,7 @@ export default function HomePage() {
           <TestimonialSection />
           <TeamSection />
           <FaqSection />
-          <NewsletterSection />
+          <FormSection />
           <Footer />
         </AgencyWrapper>
         {/* End of agency wrapper section */}
