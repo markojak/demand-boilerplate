@@ -19,16 +19,34 @@ import Footer from '../containers/Agency/Footer';
 import { DrawerProvider } from '../common/src/contexts/DrawerContext';
 import FaqSection from '../containers/Agency/FaqSection';
 import FormSection from '../containers/Agency/FormSection';
+import { NextSeo } from 'next-seo';
 
 export default function HomePage() {
   return (
     <ThemeProvider theme={agencyTheme}>
       <Fragment>
         {/* Start agency head section */}
+        <NextSeo
+          title="Agency | A react next landing page"
+          description="React next landing page"
+          openGraph={{
+            url: 'https://www.url.ie/a',
+            title: 'Open Graph Title',
+            description: 'Open Graph Description',
+            images: [
+              {
+                url: 'https://www.example.ie/og-image-01.jpg',
+                width: 800, // optional
+                height: 600, // optional
+                alt: 'Og Image Alt' // optional
+              }
+              //{ url: 'https://www.example.ie/og-image-03.jpg' },
+            ],
+            site_name: 'SiteName'
+          }}
+        />
         <Head>
-          <title>Agency | A react next landing page</title>
           <meta name="theme-color" content="#10ac84" />
-          <meta name="Description" content="React next landing page" />
           {/* Load google fonts */}
           <link
             href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
