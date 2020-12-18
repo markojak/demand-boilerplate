@@ -56,6 +56,7 @@ export default function HomePage() {
         <ResetCSS />
         <GlobalStyle />
         {/* End of agency head section */}
+
         {/* Start agency wrapper section */}
         <AgencyWrapper>
           <Sticky top={0} innerZ={9999} activeClass="sticky-nav-active">
