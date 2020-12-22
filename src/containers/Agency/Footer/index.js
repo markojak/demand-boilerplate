@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { get } from 'lodash';
+import { RichText } from 'prismic-reactjs';
+
 import Box from 'src/common/src/components/Box';
 import Text from 'src/common/src/components/Text';
 import Heading from 'src/common/src/components/Heading';
@@ -10,7 +13,7 @@ import FooterWrapper, { List, ListItem } from './footer.style';
 
 import LogoImage from 'src/common/src/assets/image/agency/logo.png';
 
-import data from 'src/common/src/data/Agency';
+//import data from 'src/common/src/data/Agency';
 
 const Footer = ({
   row,
@@ -20,7 +23,9 @@ const Footer = ({
   titleStyle,
   logoStyle,
   textStyle,
+  navigation
 }) => {
+  const footerNavigation = get(navigation, '[0].node.body', null);
   return (
     <FooterWrapper id="footerSection">
       <Container>
@@ -37,20 +42,42 @@ const Footer = ({
           </Box>
           {/* End of footer logo column */}
           <Box {...colTwo}>
-            {data.menuWidget.map((widget) => (
-              <Box className="col" {...col} key={widget.id}>
-                <Heading content={widget.title} {...titleStyle} />
-                <List>
-                  {widget.menuItems.map((item) => (
-                    <ListItem key={`list__item-${item.id}`}>
-                      <Link href={item.url}>
-                        <a className="ListItem">{item.text}</a>
-                      </Link>
-                    </ListItem>
-                  ))}
-                </List>
-              </Box>
-            ))}
+            {!!footerNavigation &&
+              footerNavigation.map((menuSlice, index) => (
+                <Box className="col" {...col} key={`footerMenuCol_${index}`}>
+                  <Heading
+                    content={RichText.asText(
+                      get(menuSlice, 'primary.section_title', '')
+                    )}
+                    {...titleStyle}
+                  />
+                  <List>
+                    {menuSlice.fields.map((field, index2) => (
+                      <ListItem key={`list__item-footer-${index2}`}>
+                        {!!field.external_url ? (
+                          <a
+                            href={RichText.asText(field.external_url)}
+                            target={'_blank'}
+                          >
+                            {RichText.asText(field.name)}
+                          </a>
+                        ) : (
+                          <Link
+                            href={get(field, 'page._meta.uid', '').replace(
+                              'index',
+                              ''
+                            )}
+                          >
+                            <a className="ListItem">
+                              {RichText.asText(field.name)}
+                            </a>
+                          </Link>
+                        )}
+                      </ListItem>
+                    ))}
+                  </List>
+                </Box>
+              ))}
           </Box>
           {/* End of footer List column */}
         </Box>
@@ -67,7 +94,7 @@ Footer.propTypes = {
   colTwo: PropTypes.object,
   titleStyle: PropTypes.object,
   textStyle: PropTypes.object,
-  logoStyle: PropTypes.object,
+  logoStyle: PropTypes.object
 };
 
 // Footer default style
@@ -77,7 +104,7 @@ Footer.defaultProps = {
     flexBox: true,
     flexWrap: 'wrap',
     ml: '-4px',
-    mr: '-4px',
+    mr: '-4px'
   },
   // Footer col one style
   colOne: {
@@ -85,38 +112,38 @@ Footer.defaultProps = {
     mt: [0, '13px'],
     mb: ['30px', 0],
     pl: ['15px', 0],
-    pr: ['15px', '15px', 0],
+    pr: ['15px', '15px', 0]
   },
   // Footer col two style
   colTwo: {
     width: ['100%', '70%', '65%', '77%'],
     flexBox: true,
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   // Footer col default style
   col: {
     width: ['100%', '50%', '50%', '25%'],
     pl: '15px',
     pr: '15px',
-    mb: '30px',
+    mb: '30px'
   },
   // widget title default style
   titleStyle: {
     color: '#343d48',
     fontSize: '16px',
-    fontWeight: '700',
+    fontWeight: '700'
   },
   // Default logo size
   logoStyle: {
     width: '128px',
-    mb: '15px',
+    mb: '15px'
   },
   // widget text default style
   textStyle: {
     color: '#0f2137',
     fontSize: '16px',
-    mb: '10px',
-  },
+    mb: '10px'
+  }
 };
 
 export default Footer;

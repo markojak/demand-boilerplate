@@ -22,7 +22,6 @@ function socialIconResolver(type) {
 }
 
 const CopyrightSection = ({ socialIcons }) => {
-  console.log(socialIcons);
   return (
     <CopyrightWrapper className="copyright_section">
       <ul>
