@@ -1,5 +1,9 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
+import { NextSeo } from 'next-seo';
+import { get } from 'lodash';
+import { RichText } from 'prismic-reactjs';
+
 import Sticky from 'react-stickynode';
 import { ThemeProvider } from 'styled-components';
 import { agencyTheme } from '../common/src/theme/agency';
@@ -19,31 +23,42 @@ import Footer from '../containers/Agency/Footer';
 import { DrawerProvider } from '../common/src/contexts/DrawerContext';
 import FaqSection from '../containers/Agency/FaqSection';
 import FormSection from '../containers/Agency/FormSection';
-import { NextSeo } from 'next-seo';
+import { fetchAPI, prepareOpenGraphDataObject } from '../utils/utils';
+import {
+  fetchIndexPageQuery,
+  fetchNavigationsQuery,
+  fetchSocialIconsQuery
+} from '../utils/queries';
 
-export default function HomePage() {
+export async function getStaticProps(context) {
+  const query = `
+    query {
+      ${fetchNavigationsQuery}
+      ${fetchSocialIconsQuery}
+      ${fetchIndexPageQuery}
+    }
+  `;
+  const data = await fetchAPI(query);
+
+  return {
+    props: {
+      navigations: get(data, 'allNavigations.edges', null),
+      socialIcons: get(data, 'allSocial_icons.edges', null),
+      page: get(data, 'allPages.edges[0].node', null)
+    },
+    revalidate: process.env.revalidate
+  };
+}
+
+export default function HomePage({ navigations, socialIcons, page }) {
   return (
     <ThemeProvider theme={agencyTheme}>
       <Fragment>
         {/* Start agency head section */}
         <NextSeo
-          title="Agency | A react next landing page"
-          description="React next landing page"
-          openGraph={{
-            url: 'https://www.url.ie/a',
-            title: 'Open Graph Title',
-            description: 'Open Graph Description',
-            images: [
-              {
-                url: 'https://www.example.ie/og-image-01.jpg',
-                width: 800, // optional
-                height: 600, // optional
-                alt: 'Og Image Alt' // optional
-              }
-              //{ url: 'https://www.example.ie/og-image-03.jpg' },
-            ],
-            site_name: 'SiteName'
-          }}
+          title={RichText.asText(page.seo_title)}
+          description={RichText.asText(page.seo_description)}
+          openGraph={prepareOpenGraphDataObject(page)}
         />
         <Head>
           <meta name="theme-color" content="#10ac84" />
@@ -61,7 +76,12 @@ export default function HomePage() {
         <AgencyWrapper>
           <Sticky top={0} innerZ={9999} activeClass="sticky-nav-active">
             <DrawerProvider>
-              <Navbar />
+              <Navbar
+                socialIcons={socialIcons}
+                navigation={navigations.filter(
+                  (nav) => nav.node.location === 'Main'
+                )}
+              />
             </DrawerProvider>
           </Sticky>
           <BannerSection />
