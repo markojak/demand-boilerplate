@@ -2,8 +2,11 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Scrollspy from 'react-scrollspy';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
+import { RichText } from 'prismic-reactjs';
+import { get } from 'lodash';
 
 import { DrawerContext } from '../../contexts/DrawerContext';
+import Link from 'next/link';
 
 const ScrollSpyMenu = ({ className, menuItems, drawerClose, ...props }) => {
   const { dispatch } = useContext(DrawerContext);
@@ -11,9 +14,11 @@ const ScrollSpyMenu = ({ className, menuItems, drawerClose, ...props }) => {
   const scrollItems = [];
 
   // convert menu path to scrollspy items
-  menuItems.forEach((item) => {
-    scrollItems.push(item.path.slice(1));
-  });
+  menuItems
+    .filter((item) => !!item.scroll_path)
+    .forEach((item) => {
+      scrollItems.push(item.scroll_path.slice(1));
+    });
 
   // Add all classs to an array
   const addAllClasses = ['scrollspy__menu'];
@@ -26,7 +31,7 @@ const ScrollSpyMenu = ({ className, menuItems, drawerClose, ...props }) => {
   // Close drawer when click on menu item
   const toggleDrawer = () => {
     dispatch({
-      type: 'TOGGLE',
+      type: 'TOGGLE'
     });
   };
 
@@ -39,21 +44,36 @@ const ScrollSpyMenu = ({ className, menuItems, drawerClose, ...props }) => {
     >
       {menuItems.map((menu, index) => (
         <li key={`menu-item-${index}`}>
-          {menu.staticLink ? (
-            <a href={menu.path}>{menu.label}</a>
+          {!!menu.scroll_path === false ? (
+            <>
+              {!!menu.external_url ? (
+                <a href={RichText.asText(menu.external_url)} target={'_blank'}>
+                  {RichText.asText(menu.name)}
+                </a>
+              ) : (
+                <Link
+                  href={get(menu, 'page._meta.uid', '').replace('index', '')}
+                >
+                  <a onClick={toggleDrawer}>{RichText.asText(menu.name)}</a>
+                </Link>
+              )}
+            </>
           ) : (
             <>
               {drawerClose ? (
                 <AnchorLink
-                  href={menu.path}
-                  offset={menu.offset}
+                  href={RichText.asText(menu.scroll_path)}
+                  offset={100}
                   onClick={toggleDrawer}
                 >
-                  {menu.label}
+                  {RichText.asText(menu.name)}
                 </AnchorLink>
               ) : (
-                <AnchorLink href={menu.path} offset={menu.offset}>
-                  {menu.label}
+                <AnchorLink
+                  href={RichText.asText(menu.scroll_path)}
+                  offset={100}
+                >
+                  {RichText.asText(menu.name)}
                 </AnchorLink>
               )}
             </>
@@ -94,12 +114,12 @@ ScrollSpyMenu.propTypes = {
   /**
    * Function to be executed when the active item has been updated [optional].
    */
-  onUpdate: PropTypes.func,
+  onUpdate: PropTypes.func
 };
 
 ScrollSpyMenu.defaultProps = {
   componentTag: 'ul',
-  currentClassName: 'is-current',
+  currentClassName: 'is-current'
 };
 
 export default ScrollSpyMenu;
