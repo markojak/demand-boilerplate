@@ -95,7 +95,11 @@ export default function HomePage({ navigations, socialIcons, page }) {
           <TeamSection />
           <FaqSection />
           <FormSection />
-          <Footer />
+          <Footer
+            navigation={navigations.filter(
+              (nav) => nav.node.location === 'Footer'
+            )}
+          />
         </AgencyWrapper>
         {/* End of agency wrapper section */}
       </Fragment>
