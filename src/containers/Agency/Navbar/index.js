@@ -100,7 +100,7 @@ const Navbar = ({ navbarStyle, logoStyle, socialIcons, navigation }) => {
     <NavbarWrapper {...navbarStyle}>
       <Container>
         <Logo
-          href="#"
+          href="/"
           logoSrc={LogoImage}
           title="Agency"
           logoStyle={logoStyle}

@@ -52,9 +52,57 @@ export const fetchIndexPageQuery = `
         template
         seo_title
         seo_description
-        og_title
-        og_description
         og_image
+      }
+    }
+  }
+`;
+
+export const fetchBlogUrlsQuery = `
+  allBlog_posts {
+    edges {
+      node {
+        _meta {
+          uid
+        }
+      }
+    }
+  }
+`;
+
+export const blogPostQueryFields = `
+  _meta {
+    uid
+  }
+  category_group {
+    category {
+      ... on Blog_category {
+        name
+        _meta {
+          uid
+        }
+      }
+    }
+  }
+  title
+  image
+  date
+  seo_title
+  seo_description
+  og_image
+  preview
+  article_highlights
+  content
+`;
+
+export const blogCategoriesQuery = `
+  allBlog_categorys {
+    edges {
+      node {
+        name
+        _meta {
+          uid
+        }
       }
     }
   }
