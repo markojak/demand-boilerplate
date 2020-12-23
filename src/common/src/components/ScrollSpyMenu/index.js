@@ -7,8 +7,10 @@ import { get } from 'lodash';
 
 import { DrawerContext } from '../../contexts/DrawerContext';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const ScrollSpyMenu = ({ className, menuItems, drawerClose, ...props }) => {
+  const router = useRouter();
   const { dispatch } = useContext(DrawerContext);
   // empty array for scrollspy items
   const scrollItems = [];
@@ -42,44 +44,55 @@ const ScrollSpyMenu = ({ className, menuItems, drawerClose, ...props }) => {
       drawerClose={drawerClose}
       {...props}
     >
-      {menuItems.map((menu, index) => (
-        <li key={`menu-item-${index}`}>
-          {!!menu.scroll_path === false ? (
-            <>
-              {!!menu.external_url ? (
-                <a href={RichText.asText(menu.external_url)} target={'_blank'}>
-                  {RichText.asText(menu.name)}
-                </a>
+      {router &&
+        menuItems
+          .filter(
+            (menu) => router.asPath === '/' || !!menu.scroll_path === false
+          )
+          .map((menu, index) => (
+            <li key={`menu-item-${index}`}>
+              {!!menu.scroll_path === false ? (
+                <>
+                  {!!menu.external_url ? (
+                    <a
+                      href={RichText.asText(menu.external_url)}
+                      target={'_blank'}
+                    >
+                      {RichText.asText(menu.name)}
+                    </a>
+                  ) : (
+                    <Link
+                      href={
+                        '/' +
+                        get(menu, 'page._meta.uid', '').replace('index', '')
+                      }
+                    >
+                      <a onClick={toggleDrawer}>{RichText.asText(menu.name)}</a>
+                    </Link>
+                  )}
+                </>
               ) : (
-                <Link
-                  href={get(menu, 'page._meta.uid', '').replace('index', '')}
-                >
-                  <a onClick={toggleDrawer}>{RichText.asText(menu.name)}</a>
-                </Link>
+                <>
+                  {drawerClose ? (
+                    <AnchorLink
+                      href={RichText.asText(menu.scroll_path)}
+                      offset={100}
+                      onClick={toggleDrawer}
+                    >
+                      {RichText.asText(menu.name)}
+                    </AnchorLink>
+                  ) : (
+                    <AnchorLink
+                      href={RichText.asText(menu.scroll_path)}
+                      offset={100}
+                    >
+                      {RichText.asText(menu.name)}
+                    </AnchorLink>
+                  )}
+                </>
               )}
-            </>
-          ) : (
-            <>
-              {drawerClose ? (
-                <AnchorLink
-                  href={RichText.asText(menu.scroll_path)}
-                  offset={100}
-                  onClick={toggleDrawer}
-                >
-                  {RichText.asText(menu.name)}
-                </AnchorLink>
-              ) : (
-                <AnchorLink
-                  href={RichText.asText(menu.scroll_path)}
-                  offset={100}
-                >
-                  {RichText.asText(menu.name)}
-                </AnchorLink>
-              )}
-            </>
-          )}
-        </li>
-      ))}
+            </li>
+          ))}
     </Scrollspy>
   );
 };

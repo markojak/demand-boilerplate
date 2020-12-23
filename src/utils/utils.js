@@ -35,8 +35,8 @@ export async function fetchAPI(query) {
 export function prepareOpenGraphDataObject(page) {
   const openGraphData = {
     url: typeof window !== 'undefined' && window.location.href,
-    title: RichText.asText(page.og_title),
-    description: RichText.asText(page.og_description),
+    title: RichText.asText(page.seo_title),
+    description: RichText.asText(page.seo_description),
     site_name: process.env.siteName
   };
 

@@ -63,10 +63,13 @@ const Footer = ({
                           </a>
                         ) : (
                           <Link
-                            href={get(field, 'page._meta.uid', '').replace(
-                              'index',
-                              ''
-                            )}
+                            href={
+                              '/' +
+                              get(field, 'page._meta.uid', '').replace(
+                                'index',
+                                ''
+                              )
+                            }
                           >
                             <a className="ListItem">
                               {RichText.asText(field.name)}
