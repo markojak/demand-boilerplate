@@ -1,6 +1,6 @@
 import React from 'react';
 import { BlogHighlightsWrapper } from './blogHighlightsSection.style';
-import Text from '../../../common/src/components/Text';
+import Text from 'src/common/src/components/Text';
 import { RichText } from 'prismic-reactjs';
 
 export default function BlogHighlightsSection({ highlights }) {

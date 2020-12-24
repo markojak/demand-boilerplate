@@ -1,10 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Box from 'src/common/src/components/Box';
-import Text from 'src/common/src/components/Text';
-import Heading from 'src/common/src/components/Heading';
-import Button from 'src/common/src/components/Button';
-import FeatureBlock from 'src/common/src/components/FeatureBlock';
 import Container from 'src/common/src/components/UI/Container';
 import BannerWrapper, {
   CategoryMenuItem,

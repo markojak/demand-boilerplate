@@ -5,6 +5,8 @@ export const BlogContentWrapper = styled.div`
   display: block;
   margin-top: 30px;
   margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid ${themeGet('colors.lightBorder', '#000')};
   font-size: 20px;
   line-height: 1.5;
   color: ${themeGet('colors.textColor', '#000')};

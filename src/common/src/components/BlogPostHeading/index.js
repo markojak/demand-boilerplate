@@ -2,23 +2,19 @@ import React from 'react';
 import { BlogPostHeadingWrapper } from './blogpostheading.style';
 import Link from 'next/link';
 import { RichText } from 'prismic-reactjs';
-import Heading from '../Heading';
-import Text from '../Text';
+import Heading from 'src/common/src/components/Heading';
+import Text from 'src/common/src/components/Text';
 
 export default function BlogPostHeading({ blogPost }) {
   return (
     <BlogPostHeadingWrapper>
-      {!!blogPost.category_group &&
-        blogPost.category_group.map(({ category }, index) => (
-          <Link
-            href={`/blog-category/${category._meta.uid}`}
-            key={`bphCategoryKey_${index}`}
-          >
-            <a className="blog-post-heading-category">
-              {RichText.asText(category.name)}
-            </a>
-          </Link>
-        ))}
+      {!!blogPost.category && (
+        <Link href={`/blog-category/${blogPost.category._meta.uid}`}>
+          <a className="blog-post-heading-category">
+            {RichText.asText(blogPost.category.name)}
+          </a>
+        </Link>
+      )}
 
       <Heading
         content={RichText.asText(blogPost.title)}
