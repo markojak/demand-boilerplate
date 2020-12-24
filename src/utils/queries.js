@@ -72,15 +72,16 @@ export const fetchBlogUrlsQuery = `
 
 export const blogPostQueryFields = `
   _meta {
+    id
     uid
+    tags
   }
-  category_group {
-    category {
-      ... on Blog_category {
-        name
-        _meta {
-          uid
-        }
+  category {
+    ... on Blog_category {
+      name
+      _meta {
+        id
+        uid
       }
     }
   }
@@ -101,9 +102,30 @@ export const blogCategoriesQuery = `
       node {
         name
         _meta {
+          id
           uid
         }
       }
     }
   }
+`;
+
+export const blogRelatedArticlesQuery = `
+  _meta {
+    id
+    uid
+    tags
+  }
+  category {
+    ... on Blog_category {
+      name
+      _meta {
+        uid
+      }
+    }
+  }
+  title
+  image
+  date
+  preview
 `;

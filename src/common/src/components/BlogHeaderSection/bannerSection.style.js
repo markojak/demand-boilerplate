@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { themeGet } from '@styled-system/theme-get';
-import BannerBG from 'src/common/src/assets/image/agency/agency-banner.png';
 
 const BannerWrapper = styled.section`
   padding-top: 100px;

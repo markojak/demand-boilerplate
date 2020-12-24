@@ -1,0 +1,49 @@
+import styled from 'styled-components';
+import { themeGet } from '@styled-system/theme-get';
+
+export const BlogRelatedWrapper = styled.div`
+  display: block;
+  padding-top: 40px;
+  padding-bottom: 30px;
+  border-top: 1px solid ${themeGet('colors.lightBorder', '#000')};
+  font-size: 16px;
+
+  .related-article-box {
+    color: ${themeGet('colors.textColor', '#000')};
+    display: flex;
+    margin: 20px 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid ${themeGet('colors.lightBorder', '#000')};
+
+    &__text-wrapper {
+      padding-right: 30px;
+    }
+
+    &__image-wrapper {
+      min-width: 174px;
+
+      img {
+        border-radius: 5px;
+      }
+    }
+
+    &:last-of-type {
+      border: none;
+    }
+  }
+
+  @media only screen and (max-width: 575px) {
+    .related-article-box {
+      flex-direction: column-reverse;
+
+      &__text-wrapper {
+        padding-right: 0px;
+        margin-top: 20px;
+      }
+
+      &__image-wrapper {
+        min-width: 100%;
+      }
+    }
+  }
+`;
