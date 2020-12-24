@@ -115,7 +115,6 @@ export default function BlogPost({
   blogCategories,
   relatedArticles
 }) {
-  console.log(relatedArticles);
   return (
     <ThemeProvider theme={agencyTheme}>
       <Fragment>

@@ -129,3 +129,20 @@ export const blogRelatedArticlesQuery = `
   date
   preview
 `;
+
+export const fetchBlogPageQuery = `
+  allPages(where: {template: "blog"}) {
+    edges {
+      node {
+        name
+        _meta {
+          uid
+        }
+        template
+        seo_title
+        seo_description
+        og_image
+      }
+    }
+  }
+`;

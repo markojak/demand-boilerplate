@@ -54,7 +54,8 @@ const Footer = ({
                   <List>
                     {menuSlice.fields.map((field, index2) => (
                       <ListItem key={`list__item-footer-${index2}`}>
-                        {!!field.external_url ? (
+                        {!!field.external_url &&
+                        !!RichText.asText(field.external_url) ? (
                           <a
                             href={RichText.asText(field.external_url)}
                             target={'_blank'}

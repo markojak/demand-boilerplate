@@ -53,7 +53,8 @@ const ScrollSpyMenu = ({ className, menuItems, drawerClose, ...props }) => {
             <li key={`menu-item-${index}`}>
               {!!menu.scroll_path === false ? (
                 <>
-                  {!!menu.external_url ? (
+                  {!!menu.external_url &&
+                  !!RichText.asText(menu.external_url) ? (
                     <a
                       href={RichText.asText(menu.external_url)}
                       target={'_blank'}

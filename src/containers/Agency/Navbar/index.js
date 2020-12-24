@@ -100,10 +100,10 @@ const Navbar = ({ navbarStyle, logoStyle, socialIcons, navigation }) => {
     <NavbarWrapper {...navbarStyle}>
       <Container>
         <Logo
-          href="/"
           logoSrc={LogoImage}
           title="Agency"
           logoStyle={logoStyle}
+          withAchor={true}
         />
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Button
