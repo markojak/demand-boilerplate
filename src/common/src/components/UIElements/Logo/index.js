@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Text from '../../Text';
 import Link from '../../Link';
 import Image from '../../Image';
+import NextLink from 'next/link';
 
 const Logo = ({
   logoWrapperStyle,
@@ -16,13 +17,15 @@ const Logo = ({
 }) => (
   <Link {...props} {...logoWrapperStyle}>
     {withAchor ? (
-      <a {...anchorProps}>
-        {logoSrc ? (
-          <Image src={logoSrc} alt={title} {...logoStyle} />
-        ) : (
-          <Text content={title} {...titleStyle} />
-        )}
-      </a>
+      <NextLink href={'/'}>
+        <a {...anchorProps}>
+          {logoSrc ? (
+            <Image src={logoSrc} alt={title} {...logoStyle} />
+          ) : (
+            <Text content={title} {...titleStyle} />
+          )}
+        </a>
+      </NextLink>
     ) : (
       <>
         {logoSrc ? (
@@ -42,7 +45,7 @@ Logo.propTypes = {
   logoStyle: PropTypes.object,
   titleStyle: PropTypes.object,
   withAchor: PropTypes.bool,
-  anchorProps: PropTypes.object,
+  anchorProps: PropTypes.object
 };
 
 Logo.defaultProps = {
@@ -50,14 +53,14 @@ Logo.defaultProps = {
     display: 'inline-block',
     mr: '1rem',
     'a:hover,a:focus': {
-      textDecoration: 'none',
-    },
+      textDecoration: 'none'
+    }
   },
   titleStyle: {
     display: 'inline-block',
     fontSize: '2rem',
     lineHeight: 'inherit',
-    whiteSpace: 'nowrap',
-  },
+    whiteSpace: 'nowrap'
+  }
 };
 export default Logo;
