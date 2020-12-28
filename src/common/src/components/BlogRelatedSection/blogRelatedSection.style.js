@@ -17,12 +17,17 @@ export const BlogRelatedWrapper = styled.div`
 
     &__text-wrapper {
       padding-right: 30px;
+
+      h4 {
+        color: ${themeGet('colors.headingColor', '#000')};
+      }
     }
 
     &__image-wrapper {
       min-width: 174px;
 
       img {
+        width: 200px;
         border-radius: 5px;
       }
     }
@@ -43,6 +48,13 @@ export const BlogRelatedWrapper = styled.div`
 
       &__image-wrapper {
         min-width: 100%;
+
+        img {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+          object-position: top;
+        }
       }
     }
   }

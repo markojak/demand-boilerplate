@@ -1,5 +1,7 @@
 import {
   blogCategoriesQuery,
+  blogFeaturedArticleQuery,
+  blogNewArticlesQuery,
   fetchBlogPageQuery,
   fetchNavigationsQuery,
   fetchSocialIconsQuery
@@ -22,25 +24,51 @@ import { DrawerProvider } from '../../common/src/contexts/DrawerContext';
 import Navbar from '../../containers/Agency/Navbar';
 import BlogHeaderSection from '../../common/src/components/BlogHeaderSection';
 import Footer from '../../containers/Agency/Footer';
+import Container from '../../common/src/components/UI/Container';
+import { Col, Row } from '../../containers/AppMinimal/Blog/blog.style';
+import Heading from '../../common/src/components/Heading';
+import BlogNewArticles from '../../common/src/components/BlogNewArticles';
+import BlogFeaturedArticle from '../../common/src/components/BlogFeaturedArticle';
 
 export const getStaticProps = async ({ params }) => {
   const query = `
     query {
       ${fetchNavigationsQuery}
       ${fetchSocialIconsQuery}
-      ${blogCategoriesQuery} 
-      ${fetchBlogPageQuery}      
+      ${blogCategoriesQuery}
+      ${fetchBlogPageQuery}
+      
+      allBlog_posts (sortBy:date_DESC, last: 5) {
+        edges {
+          node {
+            ${blogNewArticlesQuery}
+          }
+        }
+      }
     }
   `;
   const data = await fetchAPI(query);
 
+  const props = {
+    navigations: get(data, 'allNavigations.edges', null),
+    socialIcons: get(data, 'allSocial_icons.edges', null),
+    blogCategories: get(data, 'allBlog_categorys.edges', null),
+    page: get(data, 'allPages.edges[0].node', null),
+    newArticles: get(data, 'allBlog_posts.edges', null)
+  };
+
+  const featuredArticleData = await fetchAPI(blogFeaturedArticleQuery);
+  const featuredArticle = get(
+    featuredArticleData,
+    'allBlog_posts.edges[0].node',
+    null
+  );
+  if (featuredArticle) {
+    props.featuredArticle = featuredArticle;
+  }
+
   return {
-    props: {
-      navigations: get(data, 'allNavigations.edges', null),
-      socialIcons: get(data, 'allSocial_icons.edges', null),
-      blogCategories: get(data, 'allBlog_categorys.edges', null),
-      page: get(data, 'allPages.edges[0].node', null)
-    },
+    props: props,
     revalidate: process.env.revalidate
   };
 };
@@ -49,7 +77,9 @@ export default function BlogPage({
   navigations,
   socialIcons,
   blogCategories,
-  page
+  page,
+  featuredArticle,
+  newArticles
 }) {
   return (
     <ThemeProvider theme={agencyTheme}>
@@ -85,6 +115,37 @@ export default function BlogPage({
             </DrawerProvider>
           </Sticky>
           <BlogHeaderSection blogCategories={blogCategories} />
+
+          <Container>
+            <Row>
+              <Col>
+                {featuredArticle && (
+                  <BlogFeaturedArticle featuredArticle={featuredArticle} />
+                )}
+              </Col>
+              <Col
+                style={{
+                  borderRight: `2px solid #f1f4f6`
+                }}
+              >
+                <Heading
+                  as={'h2'}
+                  content={'New articles'}
+                  fontSize={['16px', '18px', '20px', '24px']}
+                  fontWeight={300}
+                />
+                <BlogNewArticles newArticles={newArticles} />
+              </Col>
+              <Col>
+                <Heading
+                  as={'h2'}
+                  content={'Popular articles'}
+                  fontSize={['16px', '18px', '20px', '24px']}
+                  fontWeight={300}
+                />
+              </Col>
+            </Row>
+          </Container>
 
           <Footer
             navigation={navigations.filter(
