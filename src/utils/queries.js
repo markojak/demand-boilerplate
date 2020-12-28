@@ -130,6 +130,48 @@ export const blogRelatedArticlesQuery = `
   preview
 `;
 
+export const blogNewArticlesQuery = `
+  _meta {
+    id
+    uid
+  }
+  category {
+    ... on Blog_category {
+      name
+      _meta {
+        uid
+      }
+    }
+  }
+  title
+  image
+`;
+
+export const blogFeaturedArticleQuery = `
+query {
+  allBlog_posts (where: {is_featured: true}, sortBy:date_DESC, last: 1){
+    edges {
+      node {
+        _meta {
+          id
+          uid
+        }
+        category {
+          ... on Blog_category {
+            name
+            _meta {
+              uid
+            }
+          }
+        }
+        title
+        image
+      }
+    }
+  }
+}
+`;
+
 export const fetchBlogPageQuery = `
   allPages(where: {template: "blog"}) {
     edges {

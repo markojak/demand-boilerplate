@@ -7,7 +7,6 @@ import Image from '../Image';
 import Link from 'next/link';
 
 export default function BlogRelatedSection({ relatedArticles }) {
-  console.log(relatedArticles);
   return (
     <BlogRelatedWrapper>
       <Heading
@@ -32,7 +31,6 @@ export default function BlogRelatedSection({ relatedArticles }) {
                   content={RichText.asText(node.title)}
                   fontSize={['18px', '20px', '22px', '24px']}
                   fontWeight={'400'}
-                  color={'#0f2137'}
                 />
                 <Text
                   content={RichText.asText(node.preview)}
