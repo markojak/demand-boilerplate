@@ -145,6 +145,25 @@ export const blogNewArticlesQuery = `
   }
   title
   image
+  date
+`;
+
+export const blogCategoryArticlesQuery = `
+  _meta {
+    id
+    uid
+  }
+  category {
+    ... on Blog_category {
+      name
+      _meta {
+        uid
+      }
+    }
+  }
+  title
+  image
+  date
 `;
 
 export const blogFeaturedArticleQuery = `
@@ -174,6 +193,23 @@ query {
 
 export const fetchBlogPageQuery = `
   allPages(where: {template: "blog"}) {
+    edges {
+      node {
+        name
+        _meta {
+          uid
+        }
+        template
+        seo_title
+        seo_description
+        og_image
+      }
+    }
+  }
+`;
+
+export const fetchBlogCategoryPageQuery = `
+  allPages(where: {template: "blog-category"}) {
     edges {
       node {
         name

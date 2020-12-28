@@ -25,7 +25,7 @@ const SearchPanel = ({ titleStyle, hintStyle }) => {
 // SearchPanel style props
 SearchPanel.propTypes = {
   titleStyle: PropTypes.object,
-  hintTextStyle: PropTypes.object,
+  hintTextStyle: PropTypes.object
 };
 
 // SearchPanel default style
@@ -36,7 +36,7 @@ SearchPanel.defaultProps = {
     fontWeight: '400',
     color: '#20201D',
     letterSpacing: '-0.025em',
-    mb: '30px',
+    mb: '30px'
   },
   // hint default style
   hintStyle: {
@@ -46,8 +46,8 @@ SearchPanel.defaultProps = {
     letterSpacing: '-0.025em',
     mt: '17px',
     ml: ['15px', '30px'],
-    mb: '0',
-  },
+    mb: '0'
+  }
 };
 
 export default SearchPanel;

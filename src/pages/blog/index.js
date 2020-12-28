@@ -29,6 +29,7 @@ import { Col, Row } from '../../containers/AppMinimal/Blog/blog.style';
 import Heading from '../../common/src/components/Heading';
 import BlogNewArticles from '../../common/src/components/BlogNewArticles';
 import BlogFeaturedArticle from '../../common/src/components/BlogFeaturedArticle';
+import BlogPopularArticles from '../../common/src/components/BlogPopularArticles';
 
 export const getStaticProps = async ({ params }) => {
   const query = `
@@ -38,7 +39,7 @@ export const getStaticProps = async ({ params }) => {
       ${blogCategoriesQuery}
       ${fetchBlogPageQuery}
       
-      allBlog_posts (sortBy:date_DESC, last: 5) {
+      allBlog_posts (where: {is_featured: false}, sortBy:date_DESC, last: 5) {
         edges {
           node {
             ${blogNewArticlesQuery}
@@ -143,6 +144,7 @@ export default function BlogPage({
                   fontSize={['16px', '18px', '20px', '24px']}
                   fontWeight={300}
                 />
+                <BlogPopularArticles popularArticles={newArticles} />
               </Col>
             </Row>
           </Container>
