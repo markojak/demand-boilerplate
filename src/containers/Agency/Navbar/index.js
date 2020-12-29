@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import { openModal, closeModal } from '@redq/reuse-modal';
 import NavbarWrapper from 'src/common/src/components/Navbar';
@@ -16,7 +17,7 @@ import LogoImage from 'src/common/src/assets/image/agency/logo.png';
 
 import { DrawerContext } from 'src/common/src/contexts/DrawerContext';
 
-import data from 'src/common/src/data/Agency/';
+//import data from 'src/common/src/data/Agency/';
 
 // Default close button for modal
 const CloseModalButton = () => (
@@ -38,8 +39,9 @@ const CloseModalButtonAlt = () => (
   />
 );
 
-const Navbar = ({ navbarStyle, logoStyle }) => {
+const Navbar = ({ navbarStyle, logoStyle, socialIcons, navigation }) => {
   const { state, dispatch } = useContext(DrawerContext);
+  const menuItems = get(navigation, '[0]node.body[0].fields', null);
 
   // Search modal handler
   const handleSearchModal = () => {
@@ -54,13 +56,13 @@ const Navbar = ({ navbarStyle, logoStyle }) => {
         transition: {
           mass: 1,
           tension: 180,
-          friction: 26,
-        },
+          friction: 26
+        }
       },
       component: SearchPanel,
       componentProps: {},
       closeComponent: CloseModalButtonAlt,
-      closeOnClickOutside: false,
+      closeOnClickOutside: false
     });
   };
 
@@ -77,20 +79,20 @@ const Navbar = ({ navbarStyle, logoStyle }) => {
         transition: {
           mass: 1,
           tension: 180,
-          friction: 26,
-        },
+          friction: 26
+        }
       },
       component: LoginModal,
       componentProps: {},
       closeComponent: CloseModalButton,
-      closeOnClickOutside: false,
+      closeOnClickOutside: false
     });
   };
 
   // Toggle drawer
   const toggleHandler = () => {
     dispatch({
-      type: 'TOGGLE',
+      type: 'TOGGLE'
     });
   };
 
@@ -98,10 +100,10 @@ const Navbar = ({ navbarStyle, logoStyle }) => {
     <NavbarWrapper {...navbarStyle}>
       <Container>
         <Logo
-          href="#"
           logoSrc={LogoImage}
           title="Agency"
           logoStyle={logoStyle}
+          withAchor={true}
         />
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Button
@@ -124,11 +126,11 @@ const Navbar = ({ navbarStyle, logoStyle }) => {
             toggleHandler={toggleHandler}
           >
             <ScrollSpyMenu
-              menuItems={data.menuItems}
+              menuItems={menuItems}
               drawerClose={true}
               offset={-100}
             />
-            <CopyrightSection />
+            <CopyrightSection socialIcons={socialIcons} />
           </Drawer>
         </div>
       </Container>
@@ -139,19 +141,19 @@ const Navbar = ({ navbarStyle, logoStyle }) => {
 // Navbar style props
 Navbar.propTypes = {
   navbarStyle: PropTypes.object,
-  logoStyle: PropTypes.object,
+  logoStyle: PropTypes.object
 };
 
 Navbar.defaultProps = {
   // Default navbar style
   navbarStyle: {
-    minHeight: '70px',
+    minHeight: '70px'
   },
   // Default logo size
   logoStyle: {
     width: '128px',
-    height: 'auto',
-  },
+    height: 'auto'
+  }
 };
 
 export default Navbar;

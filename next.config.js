@@ -19,9 +19,10 @@ module.exports = withPlugins(
   ],
   {
     env: {
-      apiBaseUrl: false ? 'http://localhost:1337' : 'https://zf.mime.ai',
-      s3Prefix: 'https://xy.s3.eu-central-1.amazonaws.com/',
-      revalidate: 600,
+      apiBaseUrl: 'https://zerofriction.prismic.io',
+      siteName: 'ZeroFriction',
+      copyrightText: 'Copyrights 2020 ZeroFriction Inc',
+      revalidate: 600, // in seconds.
       gtmCode: 'GTM-NP7RQ5N', // Google Tag Manager Code.
       gaCode: 'G-KEV1GF964G', // Google Analytics Code.
       gSiteVer: 'sgok4LsDHBrwvBbgPOjcMmgneKf6dzI2Xgt1Dz_0iC4', // Content for Google Site Verification meta tag.

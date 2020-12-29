@@ -90,7 +90,7 @@ const FormSection = ({ sectionHeader, sectionTitle, btnStyle }) => {
           <Heading content="Example form title" {...sectionTitle} />
         </Box>
         <Box>
-          <form onSubmit={handleFormSubmit}>
+          <form onSubmit={handleFormSubmit} id="lead">
             <FormInnerDiv>
               <Input
                 required={true}
