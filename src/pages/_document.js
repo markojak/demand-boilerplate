@@ -34,7 +34,23 @@ export default class CustomDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="shortcut icon" type="image/x-icon" href={FavIcon} />
-          {!!process.env.gaCode && (
+
+
+     {!!process.env.gtmCode && (
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                  })(window,document,'script','dataLayer','${process.env.gtmCode}');
+                `
+              }}
+            />
+          )}
+
+          {/* {!!process.env.gaCode && (
             <>
               <script
                 async
@@ -52,7 +68,7 @@ export default class CustomDocument extends Document {
                 }}
               />
             </>
-          )}
+          )} */}
 
           {!!process.env.gSiteVer && (
             <meta
