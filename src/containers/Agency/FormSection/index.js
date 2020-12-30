@@ -53,8 +53,9 @@ const FormSection = ({ sectionHeader, sectionTitle, btnStyle }) => {
     // Send form data to GTM.
     const tagManagerArgs = {
       gtmId: process.env.gtmCode,
-      events: {
-        sendUserInfo: {
+      dataLayer: {
+        formId: 'Lead',
+        fields: {
           email: email,
           firstName: firstName,
           lastName: lastName,
