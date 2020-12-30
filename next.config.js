@@ -20,11 +20,11 @@ module.exports = withPlugins(
   {
     env: {
       apiBaseUrl: 'https://zerofriction.prismic.io',
-      siteName: 'ZeroFriction',
-      copyrightText: 'Copyrights 2020 ZeroFriction Inc',
+      siteName: 'Secta',
+      copyrightText: 'Copyrights 2020 Secta AI, Inc',
       revalidate: 600, // in seconds.
       gtmCode: 'GTM-NP7RQ5N', // Google Tag Manager Code.
-      gaCode: 'G-KEV1GF964G', // Google Analytics Code.
+      gaCode: 'G-99C7PD64GH', // Google Analytics Code. (View ln53 in _document.js for commented out Gtag installation)
       gSiteVer: 'sgok4LsDHBrwvBbgPOjcMmgneKf6dzI2Xgt1Dz_0iC4', // Content for Google Site Verification meta tag.
       airtableApiKey: 'keywZ51MOT5QEvd9Y',
       airtableBaseId: 'appovYEGzL5cu8mbl'
