@@ -7,6 +7,7 @@ import Button from 'src/common/src/components/Button';
 import Container from 'src/common/src/components/UI/Container';
 import FormSectionWrapper, { FormInnerDiv } from './formSection.style';
 import Alert from '../../../common/src/components/Alert';
+import TagManager from 'react-gtm-module';
 
 const FormSection = ({ sectionHeader, sectionTitle, btnStyle }) => {
   const [isSuccessAlertVisible, setIsSuccessAlertVisible] = useState(false);
@@ -48,6 +49,23 @@ const FormSection = ({ sectionHeader, sectionTitle, btnStyle }) => {
 
     // This will set the submit button disabled and display loading animation.
     setIsLoading(true);
+
+    // Send form data to GTM.
+    const tagManagerArgs = {
+      gtmId: process.env.gtmCode,
+      events: {
+        sendUserInfo: {
+          email: email,
+          firstName: firstName,
+          lastName: lastName,
+          company: company,
+          phone: phone,
+          title: title
+        }
+      }
+    };
+
+    TagManager.initialize(tagManagerArgs);
 
     // Send form data to Airtable.
     const Airtable = require('airtable');
