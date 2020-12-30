@@ -34,25 +34,6 @@ export default class CustomDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="shortcut icon" type="image/x-icon" href={FavIcon} />
-          {!!process.env.gaCode && (
-            <>
-              <script
-                async
-                src={`https://www.googletagmanager.com/gtag/js?id=${process.env.gaCode}`}
-              />
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', '${process.env.gaCode}');
-`
-                }}
-              />
-            </>
-          )}
 
           {!!process.env.gSiteVer && (
             <meta
