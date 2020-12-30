@@ -35,8 +35,7 @@ export default class CustomDocument extends Document {
         <Head>
           <link rel="shortcut icon" type="image/x-icon" href={FavIcon} />
 
-
-     {!!process.env.gtmCode && (
+          {/*!!process.env.gtmCode && (
             <script
               dangerouslySetInnerHTML={{
                 __html: `
@@ -48,7 +47,7 @@ export default class CustomDocument extends Document {
                 `
               }}
             />
-          )}
+          )*/}
 
           {/* {!!process.env.gaCode && (
             <>
