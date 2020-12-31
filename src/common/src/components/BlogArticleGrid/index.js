@@ -1,13 +1,39 @@
 import { RichText } from 'prismic-reactjs';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Heading from '../Heading';
 import Image from '../Image';
 import Link from 'next/link';
 import { Col } from './blogArticleGrid.style';
 import { Row } from '../../../../containers/AppMinimal/Blog/blog.style';
 import Container from '../UI/Container';
+import Button from '../Button';
+import { fetchArticlesPaginated } from '../../../../utils/utils';
+import { useRouter } from 'next/router';
 
-export default function BlogArticleGrid({ articles }) {
+let pageInfo = null;
+
+export default function BlogArticleGrid({
+  initialArticles,
+  currentCategoryId
+}) {
+  const router = useRouter();
+  const [articles, setArticles] = useState(initialArticles.edges);
+
+  useEffect(() => {
+    pageInfo = initialArticles.pageInfo;
+  }, []);
+
+  async function handleLoadMore() {
+    const newArticles = await fetchArticlesPaginated(
+      router.query.slug,
+      currentCategoryId,
+      pageInfo ? pageInfo.endCursor : null
+    );
+    pageInfo = newArticles.pageInfo;
+
+    setArticles([...articles, ...newArticles.edges]);
+  }
+
   return (
     <Container>
       <Row>
@@ -46,6 +72,9 @@ export default function BlogArticleGrid({ articles }) {
             </Col>
           ))}
       </Row>
+      <div style={{ textAlign: 'center' }}>
+        <Button title={'Load more'} onClick={handleLoadMore} />
+      </div>
     </Container>
   );
 }

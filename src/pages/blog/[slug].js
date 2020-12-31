@@ -73,7 +73,7 @@ export const getStaticProps = async ({ params }) => {
   if (blogPostCategoryId) {
     const query = `
     query {
-      allBlog_posts (sortBy:date_DESC, where: {category: "${blogPostCategoryId}"}, last: 3) {
+      allBlog_posts (sortBy:date_DESC, where: {category: "${blogPostCategoryId}"}, first: 3) {
         edges {
           node {
             ${blogRelatedArticlesQuery}

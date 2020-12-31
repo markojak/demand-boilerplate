@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { get } from 'lodash';
 import { NextSeo } from 'next-seo';
 import Head from 'next/head';
@@ -6,7 +6,11 @@ import { RichText } from 'prismic-reactjs';
 
 import { ThemeProvider } from 'styled-components';
 import { agencyTheme } from '../../common/src/theme/agency';
-import { fetchAPI, prepareOpenGraphDataObject } from '../../utils/utils';
+import {
+  fetchAPI,
+  fetchArticlesPaginated,
+  prepareOpenGraphDataObject
+} from '../../utils/utils';
 import { ResetCSS } from '../../common/src/assets/css/style';
 import {
   AgencyWrapper,
@@ -75,34 +79,28 @@ export const getStaticProps = async ({ params }) => {
   let props = null;
 
   if (!!currentCategoryId || params.slug === 'all') {
-    const articleWherePart =
-      params.slug === 'all'
-        ? ''
-        : `where: {category: "${currentCategoryId}"}, `;
     const query = `
       query {
         ${fetchNavigationsQuery}
         ${fetchSocialIconsQuery}
         ${blogCategoriesQuery}
         ${fetchBlogCategoryPageQuery}
-        
-        allBlog_posts (${articleWherePart}sortBy:date_DESC, last: 6) {
-          edges {
-            node {
-              ${blogCategoryArticlesQuery}
-            }
-          }
-        }
       }
     `;
     const data = await fetchAPI(query);
+
+    const articles = await fetchArticlesPaginated(
+      params.slug,
+      currentCategoryId
+    );
 
     props = {
       navigations: get(data, 'allNavigations.edges', null),
       socialIcons: get(data, 'allSocial_icons.edges', null),
       blogCategories: get(data, 'allBlog_categorys.edges', null),
       page: get(data, 'allPages.edges[0].node', null),
-      articles: get(data, 'allBlog_posts.edges', null)
+      initialArticles: articles,
+      currentCategoryId
     };
   }
 
@@ -117,7 +115,8 @@ export default function BlogCategoryPage({
   socialIcons,
   blogCategories,
   page,
-  articles
+  initialArticles,
+  currentCategoryId
 }) {
   return (
     <ThemeProvider theme={agencyTheme}>
@@ -154,7 +153,10 @@ export default function BlogCategoryPage({
           </Sticky>
           <BlogHeaderSection blogCategories={blogCategories} />
 
-          <BlogArticleGrid articles={articles} />
+          <BlogArticleGrid
+            initialArticles={initialArticles}
+            currentCategoryId={currentCategoryId}
+          />
 
           <Footer
             navigation={navigations.filter(

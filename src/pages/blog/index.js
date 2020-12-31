@@ -39,7 +39,7 @@ export const getStaticProps = async ({ params }) => {
       ${blogCategoriesQuery}
       ${fetchBlogPageQuery}
       
-      allBlog_posts (where: {is_featured: false}, sortBy:date_DESC, last: 5) {
+      allBlog_posts (where: {is_featured: false}, sortBy:date_DESC, first: 5) {
         edges {
           node {
             ${blogNewArticlesQuery}
