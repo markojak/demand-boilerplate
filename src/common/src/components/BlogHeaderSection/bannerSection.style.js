@@ -38,6 +38,9 @@ const CategoryMenuItem = styled.div`
       color: ${themeGet('colors.primary', '#000')};
       transition: color 0.3s ease;
     }
+    &.is-active {
+      font-weight: bold;
+    }
   }
 `;
 

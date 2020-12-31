@@ -15,6 +15,7 @@
     "@redq/reuse-modal": "^1.2.4",
     "@styled-system/theme-get": "^5.1.2",
     "airtable": "^0.10.1",
+    "classnames": "^2.2.6",
     "lodash": "^4.17.20",
     "next": "10.0.3",
     "next-compose-plugins": "^2.2.1",
