@@ -17,19 +17,28 @@ export default function BlogArticleGrid({
   currentCategoryId
 }) {
   const router = useRouter();
-  const [articles, setArticles] = useState(initialArticles.edges);
+  const [articles, setArticles] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [displayLoadMore, setDisplayLoadMore] = useState(false);
 
   useEffect(() => {
+    setArticles(initialArticles.edges);
     pageInfo = initialArticles.pageInfo;
-  }, []);
+    setDisplayLoadMore(pageInfo.hasNextPage);
+    setLoading(false);
+  }, [initialArticles]);
 
   async function handleLoadMore() {
+    setLoading(true);
     const newArticles = await fetchArticlesPaginated(
       router.query.slug,
       currentCategoryId,
-      pageInfo ? pageInfo.endCursor : null
+      pageInfo ? pageInfo.endCursor : null,
+      true
     );
     pageInfo = newArticles.pageInfo;
+    setDisplayLoadMore(pageInfo.hasNextPage);
+    setLoading(false);
 
     setArticles([...articles, ...newArticles.edges]);
   }
@@ -72,9 +81,17 @@ export default function BlogArticleGrid({
             </Col>
           ))}
       </Row>
-      <div style={{ textAlign: 'center' }}>
-        <Button title={'Load more'} onClick={handleLoadMore} />
-      </div>
+
+      {displayLoadMore && (
+        <div style={{ textAlign: 'center' }}>
+          <Button
+            title={'Load more'}
+            disabled={loading}
+            isLoading={loading}
+            onClick={handleLoadMore}
+          />
+        </div>
+      )}
     </Container>
   );
 }

@@ -33,10 +33,23 @@ export async function fetchAPI(query) {
   return json.data;
 }
 
+export async function fetchAPIBE(query) {
+  const result = await fetch('/api/query', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query: query
+    })
+  });
+  const data = await result.json();
+  return data;
+}
+
 export async function fetchArticlesPaginated(
   slug,
   currentCategoryId,
-  cursor = null
+  cursor = null,
+  beCall = false
 ) {
   const articleWherePart =
     slug === 'all' ? '' : `where: {category: "${currentCategoryId}"}, `;
@@ -59,7 +72,7 @@ export async function fetchArticlesPaginated(
         }
       }
     `;
-  const data = await fetchAPI(query);
+  const data = beCall ? await fetchAPIBE(query) : await fetchAPI(query);
   return get(data, 'allBlog_posts', null);
 }
 

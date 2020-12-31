@@ -153,10 +153,12 @@ export default function BlogCategoryPage({
           </Sticky>
           <BlogHeaderSection blogCategories={blogCategories} />
 
-          <BlogArticleGrid
-            initialArticles={initialArticles}
-            currentCategoryId={currentCategoryId}
-          />
+          {initialArticles && (
+            <BlogArticleGrid
+              initialArticles={initialArticles}
+              currentCategoryId={currentCategoryId}
+            />
+          )}
 
           <Footer
             navigation={navigations.filter(
