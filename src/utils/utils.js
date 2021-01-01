@@ -1,5 +1,6 @@
 import { get } from 'lodash';
 import { RichText } from 'prismic-reactjs';
+import { blogCategoryArticlesQuery } from './queries';
 
 export async function fetchAPI(query) {
   const apiBaseUrl = process.env.apiBaseUrl;
@@ -30,6 +31,49 @@ export async function fetchAPI(query) {
     throw new Error('Failed to fetch API');
   }
   return json.data;
+}
+
+export async function fetchAPIBE(query) {
+  const result = await fetch('/api/query', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query: query
+    })
+  });
+  const data = await result.json();
+  return data;
+}
+
+export async function fetchArticlesPaginated(
+  slug,
+  currentCategoryId,
+  cursor = null,
+  beCall = false
+) {
+  const articleWherePart =
+    slug === 'all' ? '' : `where: {category: "${currentCategoryId}"}, `;
+  const afterPart = cursor ? `after: "${cursor}"` : '';
+  const query = `
+      query {
+        allBlog_posts (${articleWherePart}sortBy:date_DESC,${afterPart} first: 3) {
+          totalCount
+          pageInfo {
+            hasPreviousPage
+            hasNextPage
+            startCursor
+            endCursor
+          }
+          edges {
+            node {
+              ${blogCategoryArticlesQuery}
+            }
+          }
+        }
+      }
+    `;
+  const data = beCall ? await fetchAPIBE(query) : await fetchAPI(query);
+  return get(data, 'allBlog_posts', null);
 }
 
 export function prepareOpenGraphDataObject(page) {

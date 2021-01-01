@@ -8,8 +8,12 @@ import BannerWrapper, {
 } from './bannerSection.style';
 import Link from 'next/link';
 import { RichText } from 'prismic-reactjs';
+import classNames from 'classnames';
+import { useRouter } from 'next/router';
 
 const BlogHeaderSection = ({ blogCategories }) => {
+  const router = useRouter();
+
   return (
     <BannerWrapper>
       <Container>
@@ -17,14 +21,27 @@ const BlogHeaderSection = ({ blogCategories }) => {
           <CategoryMenuWrapper>
             <CategoryMenuItem>
               <Link href={'/blog-category/all'}>
-                <a>All</a>
+                <a
+                  className={classNames({
+                    'is-active': router.query.slug === 'all'
+                  })}
+                >
+                  All
+                </a>
               </Link>
             </CategoryMenuItem>
             {blogCategories &&
               blogCategories.map((blogCat, index) => (
                 <CategoryMenuItem key={`blogCatMenuItem_${index}`}>
                   <Link href={`/blog-category/${blogCat.node._meta.uid}`}>
-                    <a>{RichText.asText(blogCat.node.name)}</a>
+                    <a
+                      className={classNames({
+                        'is-active':
+                          router.query.slug === blogCat.node._meta.uid
+                      })}
+                    >
+                      {RichText.asText(blogCat.node.name)}
+                    </a>
                   </Link>
                 </CategoryMenuItem>
               ))}

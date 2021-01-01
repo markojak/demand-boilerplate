@@ -168,7 +168,7 @@ export const blogCategoryArticlesQuery = `
 
 export const blogFeaturedArticleQuery = `
 query {
-  allBlog_posts (where: {is_featured: true}, sortBy:date_DESC, last: 1){
+  allBlog_posts (where: {is_featured: true}, sortBy:date_DESC, first: 1){
     edges {
       node {
         _meta {
