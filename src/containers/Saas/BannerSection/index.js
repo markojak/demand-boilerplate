@@ -28,10 +28,10 @@ const BannerSection = ({
 }) => {
   const ButtonGroup = () => (
     <Fragment>
-      <Button title="FREE TRAIL" {...btnStyle} />
+      <Button title="Join the Waitlist" {...btnStyle} />
       <Button
         className="outlined"
-        title="EXPLORE MORE"
+        title="Learn more"
         variant="outlined"
         {...outlineBtnStyle}
       />
@@ -58,7 +58,7 @@ const BannerSection = ({
               }
               description={
                 <Text
-                  content="We help to create SaaS product that are innovative, differentiated with a superb User Experience, fully accessible through mobile devices. SaaS products are changing the world ."
+                  content="Improve Conversions, decrease bounce rate and create more leads"
                   {...description}
                 />
               }
