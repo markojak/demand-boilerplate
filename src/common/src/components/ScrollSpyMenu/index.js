@@ -68,7 +68,9 @@ const ScrollSpyMenu = ({ className, menuItems, drawerClose, ...props }) => {
                         get(menu, 'page._meta.uid', '').replace('index', '')
                       }
                     >
-                      <a onClick={toggleDrawer}>{RichText.asText(menu.name)}</a>
+                      <a onClick={drawerClose ? toggleDrawer : null}>
+                        {RichText.asText(menu.name)}
+                      </a>
                     </Link>
                   )}
                 </>

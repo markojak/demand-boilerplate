@@ -20,7 +20,7 @@ const TrialSection = ({
   imageArea,
   ImageOne,
   btnStyle,
-  outlineBtnStyle,
+  outlineBtnStyle
 }) => {
   return (
     <Box {...sectionWrapper}>
@@ -60,7 +60,7 @@ TrialSection.propTypes = {
   description: PropTypes.object,
   button: PropTypes.object,
   imageArea: PropTypes.object,
-  ImageOne: PropTypes.object,
+  ImageOne: PropTypes.object
 };
 
 TrialSection.defaultProps = {
@@ -68,22 +68,22 @@ TrialSection.defaultProps = {
     as: 'section',
     className: 'trial-section',
     pt: ['20px', '40px', '60px', '80px'],
-    pb: ['0px', '0px', '0px', '80px'],
+    pb: ['0px', '0px', '0px', '80px']
   },
   row: {
     flexBox: true,
     flexWrap: 'wrap',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   textArea: {
-    width: ['100%', '100%', '80%', '43%'],
+    width: ['100%', '100%', '80%', '43%']
   },
   imageArea: {
     width: ['100%', '100%', '43%'],
     mb: ['35px', '35px', '40px', '40px'],
     flexBox: true,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   title: {
     fontSize: ['32px', '32px', '36px', '42px', '48px'],
@@ -92,31 +92,31 @@ TrialSection.defaultProps = {
     letterSpacing: '-0.025em',
     mb: '28px',
     textAlign: 'center',
-    lineHeight: '1.25',
+    lineHeight: '1.25'
   },
   description: {
     fontSize: ['15px', '15px', '16px', '16px', '16px'],
     color: 'textColor',
     lineHeight: '2.1',
     textAlign: 'center',
-    mb: ['35px', '35px', '40px', '60px'],
+    mb: ['35px', '35px', '40px', '60px']
   },
   ImageOne: {
     ml: 'auto',
-    mr: 'auto',
+    mr: 'auto'
   },
   btnStyle: {
     minWidth: '156px',
     fontSize: '14px',
     fontWeight: '500',
-    colors: 'primaryWithBg',
+    colors: 'primaryWithBg'
   },
   outlineBtnStyle: {
     minWidth: '156px',
     fontSize: '14px',
     fontWeight: '500',
-    color: '#0f2137',
-  },
+    color: '#0f2137'
+  }
 };
 
 export default TrialSection;

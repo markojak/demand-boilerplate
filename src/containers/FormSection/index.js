@@ -6,7 +6,7 @@ import Input from 'src/common/src/components/Input';
 import Button from 'src/common/src/components/Button';
 import Container from 'src/common/src/components/UI/Container';
 import FormSectionWrapper, { FormInnerDiv } from './formSection.style';
-import Alert from '../../../common/src/components/Alert';
+import Alert from '../../common/src/components/Alert';
 import TagManager from 'react-gtm-module';
 
 const FormSection = ({ sectionHeader, sectionTitle, btnStyle }) => {

@@ -23,7 +23,7 @@ import PartnerSection from '../containers/Saas/PartnerSection';
 import { DrawerProvider } from 'src/common/src/contexts/DrawerContext';
 import FaqSection from '../containers/Saas/FaqSection';
 
-import FormSection from '../containers/Agency/FormSection';
+import FormSection from '../containers/FormSection';
 
 import { fetchAPI, prepareOpenGraphDataObject } from '../utils/utils';
 import {
@@ -56,7 +56,7 @@ export default function HomePage({ navigations, socialIcons, page }) {
   return (
     <ThemeProvider theme={saasTheme}>
       <Fragment>
-        {/* Start agency head section */}
+        {/* Start head section */}
         <NextSeo
           title={RichText.asText(page.seo_title)}
           description={RichText.asText(page.seo_description)}
@@ -66,22 +66,17 @@ export default function HomePage({ navigations, socialIcons, page }) {
           <meta name="theme-color" content="#10ac84" />
           {/* Load google fonts */}
 
-          <link rel="preconnect" href="https://fonts.gstatic.com"/>
-          <link 
-          href="https://fonts.googleapis.com/css2?family=Inter&display=swap" 
-          rel="stylesheet"
-          />
-
-          {/* <link
-            href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
             rel="stylesheet"
-          /> */}
+          />
         </Head>
         <ResetCSS />
         <GlobalStyle />
-        {/* End of agency head section */}
+        {/* End of head section */}
 
-        {/* Start agency wrapper section */}
+        {/* Start wrapper section */}
         <ContentWrapper>
           <Sticky top={0} innerZ={9999} activeClass="sticky-nav-active">
             <DrawerProvider>
@@ -103,14 +98,14 @@ export default function HomePage({ navigations, socialIcons, page }) {
           <TimelineSection />
           <FaqSection />
           <TrialSection />
-          <FormSection/>
+          <FormSection />
           <Footer
             navigation={navigations.filter(
               (nav) => nav.node.location === 'Footer'
             )}
           />
         </ContentWrapper>
-        {/* End of agency wrapper section */}
+        {/* End of wrapper section */}
       </Fragment>
     </ThemeProvider>
   );
