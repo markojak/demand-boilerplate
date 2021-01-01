@@ -9,21 +9,18 @@ import {
 import { fetchAPI, prepareOpenGraphDataObject } from '../../utils/utils';
 import { get } from 'lodash';
 import { ThemeProvider } from 'styled-components';
-import { agencyTheme } from '../../common/src/theme/agency';
+import { saasTheme } from 'src/common/src/theme/saas';
 import React, { Fragment } from 'react';
 import { NextSeo } from 'next-seo';
 import { RichText } from 'prismic-reactjs';
-import Head from 'next/dist/next-server/lib/head';
+import Head from 'next/head';
 import { ResetCSS } from '../../common/src/assets/css/style';
-import {
-  AgencyWrapper,
-  GlobalStyle
-} from '../../containers/Agency/agency.blog.style';
+import { GlobalStyle, ContentWrapper } from '../../containers/Saas/saas.style';
 import Sticky from 'react-stickynode';
 import { DrawerProvider } from '../../common/src/contexts/DrawerContext';
-import Navbar from '../../containers/Agency/Navbar';
+import Navbar from '../../containers/Saas/Navbar';
 import BlogHeaderSection from '../../common/src/components/BlogHeaderSection';
-import Footer from '../../containers/Agency/Footer';
+import Footer from '../../containers/Saas/Footer';
 import Container from '../../common/src/components/UI/Container';
 import { Col, Row } from '../../containers/AppMinimal/Blog/blog.style';
 import Heading from '../../common/src/components/Heading';
@@ -83,9 +80,9 @@ export default function BlogPage({
   newArticles
 }) {
   return (
-    <ThemeProvider theme={agencyTheme}>
+    <ThemeProvider theme={saasTheme}>
       <Fragment>
-        {/* Start agency head section */}
+        {/* Start head section */}
         <NextSeo
           title={RichText.asText(page.seo_title)}
           description={RichText.asText(page.seo_description)}
@@ -101,10 +98,10 @@ export default function BlogPage({
         </Head>
         <ResetCSS />
         <GlobalStyle />
-        {/* End of agency head section */}
+        {/* End of head section */}
 
-        {/* Start agency wrapper section */}
-        <AgencyWrapper>
+        {/* Start wrapper section */}
+        <ContentWrapper>
           <Sticky top={0} innerZ={9999} activeClass="sticky-nav-active">
             <DrawerProvider>
               <Navbar
@@ -154,8 +151,8 @@ export default function BlogPage({
               (nav) => nav.node.location === 'Footer'
             )}
           />
-        </AgencyWrapper>
-        {/* End of agency wrapper section */}
+        </ContentWrapper>
+        {/* End of wrapper section */}
       </Fragment>
     </ThemeProvider>
   );
