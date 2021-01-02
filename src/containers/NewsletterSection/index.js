@@ -6,7 +6,7 @@ import Input from 'src/common/src/components/Input';
 import Button from 'src/common/src/components/Button';
 import Container from 'src/common/src/components/UI/Container';
 import NewsletterSectionWrapper, {
-  NewsletterForm,
+  NewsletterForm
 } from './newsletterSection.style';
 
 const NewsletterSection = ({ sectionHeader, sectionTitle, btnStyle }) => {
@@ -36,14 +36,14 @@ const NewsletterSection = ({ sectionHeader, sectionTitle, btnStyle }) => {
 NewsletterSection.propTypes = {
   sectionHeader: PropTypes.object,
   sectionTitle: PropTypes.object,
-  sectionSubTitle: PropTypes.object,
+  sectionSubTitle: PropTypes.object
 };
 
 // NewsletterSection default style
 NewsletterSection.defaultProps = {
   // section header default style
   sectionHeader: {
-    mb: '56px',
+    mb: '56px'
   },
   // section title default style
   sectionTitle: {
@@ -52,15 +52,15 @@ NewsletterSection.defaultProps = {
     fontWeight: '400',
     color: '#0f2137',
     letterSpacing: '-0.025em',
-    mb: '0',
+    mb: '0'
   },
   // button default style
   btnStyle: {
     minWidth: '152px',
     minHeight: '45px',
     fontSize: '14px',
-    fontWeight: '500',
-  },
+    fontWeight: '500'
+  }
 };
 
 export default NewsletterSection;
