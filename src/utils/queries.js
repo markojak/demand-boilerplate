@@ -82,6 +82,7 @@ export const blogPostQueryFields = `
       _meta {
         id
         uid
+        lastPublicationDate
       }
     }
   }
@@ -176,7 +177,7 @@ export const blogPopularArticlesQuery = `
       }
     }
   }
-`
+`;
 
 export const blogCategoryArticlesQuery = `
   _meta {

@@ -11,8 +11,8 @@ import { get } from 'lodash';
 import React, { Fragment } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { saasTheme } from 'src/common/src/theme/saas';
-import { NextSeo } from 'next-seo';
-import { RichText } from 'prismic-reactjs';
+import { ArticleJsonLd, NextSeo } from 'next-seo';
+import { Date, RichText } from 'prismic-reactjs';
 import Head from 'next/head';
 import { ResetCSS } from 'src/common/src/assets/css/style';
 import { GlobalStyle, ContentWrapper } from '../../containers/Saas/saas.style';
@@ -112,6 +112,7 @@ export default function BlogPost({
   blogCategories,
   relatedArticles
 }) {
+  const ogImageUrl = get(blogPost, 'og_image.url', null);
   return (
     <ThemeProvider theme={saasTheme}>
       <Fragment>
@@ -120,6 +121,17 @@ export default function BlogPost({
           title={RichText.asText(blogPost.seo_title)}
           description={RichText.asText(blogPost.seo_description)}
           openGraph={prepareOpenGraphDataObject(blogPost)}
+        />
+        <ArticleJsonLd
+          url={typeof window !== 'undefined' && window.location.href}
+          title={RichText.asText(blogPost.seo_title)}
+          images={[ogImageUrl]}
+          datePublished={Date(blogPost.date)}
+          dateModified={Date(blogPost.lastPublicationDate)}
+          authorName={['Test Author1']}
+          publisherName="Test Publisher"
+          publisherLogo="https://www.example.com/photos/logo.jpg"
+          description={RichText.asText(blogPost.seo_description)}
         />
         <Head>
           <meta name="theme-color" content="#10ac84" />
