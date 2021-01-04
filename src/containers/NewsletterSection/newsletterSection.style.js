@@ -44,6 +44,9 @@ const NewsletterForm = styled.div`
         }
       }
     }
+    &.hdn {
+      display: none;
+    }
   }
 
   .reusecore__button {

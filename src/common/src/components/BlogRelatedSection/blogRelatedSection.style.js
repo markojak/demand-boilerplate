@@ -5,7 +5,7 @@ export const BlogRelatedWrapper = styled.div`
   display: block;
   padding-top: 40px;
   padding-bottom: 30px;
-  border-top: 1px solid ${themeGet('colors.lightBorder', '#000')};
+  border-top: 1px solid ${themeGet('colors.inactiveIcon', '#000')};
   font-size: 16px;
 
   .related-article-box {
@@ -13,7 +13,7 @@ export const BlogRelatedWrapper = styled.div`
     display: flex;
     margin: 20px 0;
     padding-bottom: 20px;
-    border-bottom: 1px solid ${themeGet('colors.lightBorder', '#000')};
+    border-bottom: 1px solid ${themeGet('colors.inactiveIcon', '#000')};
 
     &__text-wrapper {
       padding-right: 30px;
