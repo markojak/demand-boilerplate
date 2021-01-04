@@ -2,6 +2,7 @@ import {
   blogCategoriesQuery,
   blogFeaturedArticleQuery,
   blogNewArticlesQuery,
+  blogPopularArticlesQuery,
   fetchBlogPageQuery,
   fetchNavigationsQuery,
   fetchSocialIconsQuery
@@ -43,6 +44,8 @@ export const getStaticProps = async ({ params }) => {
           }
         }
       }
+      
+      ${blogPopularArticlesQuery}
     }
   `;
   const data = await fetchAPI(query);
@@ -52,7 +55,8 @@ export const getStaticProps = async ({ params }) => {
     socialIcons: get(data, 'allSocial_icons.edges', null),
     blogCategories: get(data, 'allBlog_categorys.edges', null),
     page: get(data, 'allPages.edges[0].node', null),
-    newArticles: get(data, 'allBlog_posts.edges', null)
+    newArticles: get(data, 'allBlog_posts.edges', null),
+    popularArticles: get(data, 'allPopular_postss.edges[0].node.articles', null)
   };
 
   const featuredArticleData = await fetchAPI(blogFeaturedArticleQuery);
@@ -77,7 +81,8 @@ export default function BlogPage({
   blogCategories,
   page,
   featuredArticle,
-  newArticles
+  newArticles,
+  popularArticles
 }) {
   return (
     <ThemeProvider theme={saasTheme}>
@@ -141,7 +146,7 @@ export default function BlogPage({
                   fontSize={['16px', '18px', '20px', '24px']}
                   fontWeight={300}
                 />
-                <BlogPopularArticles popularArticles={newArticles} />
+                <BlogPopularArticles popularArticles={popularArticles} />
               </Col>
             </Row>
           </Container>

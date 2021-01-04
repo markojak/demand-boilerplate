@@ -148,6 +148,36 @@ export const blogNewArticlesQuery = `
   date
 `;
 
+export const blogPopularArticlesQuery = `
+  allPopular_postss {
+    edges {
+      node {
+        articles{
+          article {
+            ... on Blog_post {
+              _meta {
+                id
+                uid
+              }
+              category {
+                ... on Blog_category {
+                  name
+                  _meta {
+                    uid
+                  }
+                }
+              }
+              title
+              image
+              date
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 export const blogCategoryArticlesQuery = `
   _meta {
     id

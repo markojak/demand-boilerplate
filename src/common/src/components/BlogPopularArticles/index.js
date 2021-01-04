@@ -19,10 +19,10 @@ export default function BlogPopularArticles({ popularArticles }) {
   return (
     <BlogPopularArticlesWrapper>
       {popularArticles &&
-        popularArticles.map(({ node }, index) => (
+        popularArticles.map(({ article }, index) => (
           <Link
             key={`popularArticleBoxKey_${index}`}
-            href={`/blog/${node._meta.uid}`}
+            href={`/blog/${article._meta.uid}`}
           >
             <a className="popular-article-box">
               <div className="popular-article-box__number-wrapper">
@@ -31,12 +31,12 @@ export default function BlogPopularArticles({ popularArticles }) {
               <div className="popular-article-box__text-wrapper">
                 <Heading
                   as={'h3'}
-                  content={RichText.asText(node.title)}
+                  content={RichText.asText(article.title)}
                   fontSize={['14px', '14px', '14px', '18px']}
                   fontWeight={'300'}
                 />
                 <div className="popular-article-box__text-wrapper__date">
-                  {formatDate(node.date)}
+                  {formatDate(article.date)}
                 </div>
               </div>
             </a>
