@@ -128,9 +128,9 @@ export default function BlogPost({
           images={[ogImageUrl]}
           datePublished={Date(blogPost.date)}
           dateModified={Date(blogPost.lastPublicationDate)}
-          authorName={['Test Author1']}
-          publisherName="Test Publisher"
-          publisherLogo="https://www.example.com/photos/logo.jpg"
+          authorName=""
+          publisherName=""
+          publisherLogo=""
           description={RichText.asText(blogPost.seo_description)}
         />
         <Head>
