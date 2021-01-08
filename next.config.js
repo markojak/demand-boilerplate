@@ -19,7 +19,7 @@ module.exports = withPlugins(
   ],
   {
     env: {
-      apiBaseUrl: 'https://zerofriction.prismic.io',
+      apiBaseUrl: 'https://secta.prismic.io',
       siteName: 'Secta',
       copyrightText: 'Copyrights 2020 Secta AI, Inc',
       revalidate: 600, // in seconds.
