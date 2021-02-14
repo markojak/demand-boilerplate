@@ -24,6 +24,7 @@ import { DrawerProvider } from 'src/common/src/contexts/DrawerContext';
 import FaqSection from '../containers/Saas/FaqSection';
 
 import FormSection from '../containers/FormSection';
+import NewsLetterSection from '../containers/NewsletterSection';
 
 import { fetchAPI, prepareOpenGraphDataObject } from '../utils/utils';
 import {
@@ -31,6 +32,7 @@ import {
   fetchNavigationsQuery,
   fetchSocialIconsQuery
 } from '../utils/queries';
+import NewsletterSection from '../containers/NewsletterSection';
 
 export async function getStaticProps(context) {
   const query = `
@@ -90,7 +92,6 @@ export default function HomePage({ navigations, socialIcons, page }) {
           </Sticky>
           <BannerSection />
           <FeatureSection />
-          <VisitorSection />
           <ServiceSection />
           <PricingSection />
           <TestimonialSection />
@@ -99,6 +100,7 @@ export default function HomePage({ navigations, socialIcons, page }) {
           <FaqSection />
           <TrialSection />
           <FormSection />
+          <NewsletterSection/>
           <Footer
             navigation={navigations.filter(
               (nav) => nav.node.location === 'Footer'
