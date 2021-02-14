@@ -83,7 +83,7 @@ export default function BlogArticleGrid({
       </Row>
 
       {displayLoadMore && (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', paddingBottom: 30 }}>
           <Button
             title={'Load more'}
             disabled={loading}

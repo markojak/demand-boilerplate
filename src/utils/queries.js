@@ -82,6 +82,7 @@ export const blogPostQueryFields = `
       _meta {
         id
         uid
+        lastPublicationDate
       }
     }
   }
@@ -146,6 +147,36 @@ export const blogNewArticlesQuery = `
   title
   image
   date
+`;
+
+export const blogPopularArticlesQuery = `
+  allPopular_postss {
+    edges {
+      node {
+        articles{
+          article {
+            ... on Blog_post {
+              _meta {
+                id
+                uid
+              }
+              category {
+                ... on Blog_category {
+                  name
+                  _meta {
+                    uid
+                  }
+                }
+              }
+              title
+              image
+              date
+            }
+          }
+        }
+      }
+    }
+  }
 `;
 
 export const blogCategoryArticlesQuery = `

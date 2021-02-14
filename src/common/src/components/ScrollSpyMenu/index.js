@@ -19,7 +19,7 @@ const ScrollSpyMenu = ({ className, menuItems, drawerClose, ...props }) => {
   menuItems
     .filter((item) => !!item.scroll_path)
     .forEach((item) => {
-      scrollItems.push(item.scroll_path.slice(1));
+      scrollItems.push(item.scroll_path[0].text);
     });
 
   // Add all classs to an array
@@ -68,7 +68,9 @@ const ScrollSpyMenu = ({ className, menuItems, drawerClose, ...props }) => {
                         get(menu, 'page._meta.uid', '').replace('index', '')
                       }
                     >
-                      <a onClick={toggleDrawer}>{RichText.asText(menu.name)}</a>
+                      <a onClick={drawerClose ? toggleDrawer : null}>
+                        {RichText.asText(menu.name)}
+                      </a>
                     </Link>
                   )}
                 </>

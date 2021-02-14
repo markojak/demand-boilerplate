@@ -12,7 +12,7 @@ import TestimonialSectionWrapper, {
   TextWrapper,
   ImageWrapper,
   RoundWrapper,
-  ClientName,
+  ClientName
 } from './testimonialSection.style';
 
 const TestimonialSection = ({
@@ -21,17 +21,17 @@ const TestimonialSection = ({
   commentStyle,
   nameStyle,
   btnStyle,
-  designationStyle,
+  designationStyle
 }) => {
   // Glide js options
   const glideOptions = {
     type: 'carousel',
     autoplay: 4000,
-    perView: 1,
+    perView: 1
   };
 
   return (
-    <TestimonialSectionWrapper id="testimonial_section">
+    <TestimonialSectionWrapper id="testimonialSection">
       <Container>
         <Text content="CLIENT COMMENTS" {...sectionSubTitle} />
         <GlideCarousel
@@ -100,7 +100,7 @@ TestimonialSection.propTypes = {
   btnWrapperStyle: PropTypes.object,
   nameStyle: PropTypes.object,
   commentStyle: PropTypes.object,
-  designationStyle: PropTypes.object,
+  designationStyle: PropTypes.object
 };
 
 // TestimonialSection default style
@@ -117,7 +117,7 @@ TestimonialSection.defaultProps = {
     ml: 'auto',
     mr: 'auto',
     pl: '12px',
-    maxWidth: '954px',
+    maxWidth: '954px'
   },
   // client comment style
   commentStyle: {
@@ -125,7 +125,7 @@ TestimonialSection.defaultProps = {
     fontWeight: '400',
     fontSize: ['22px', '22px', '22px', '30px'],
     lineHeight: '1.72',
-    mb: '47px',
+    mb: '47px'
   },
   // client name style
   nameStyle: {
@@ -134,7 +134,7 @@ TestimonialSection.defaultProps = {
     fontWeight: '500',
     fontSize: '16px',
     lineHeight: '30px',
-    mb: 0,
+    mb: 0
   },
   // client designation style
   designationStyle: {
@@ -144,13 +144,13 @@ TestimonialSection.defaultProps = {
     fontSize: '16px',
     lineHeight: '30px',
     mb: 0,
-    ml: ['0', '10px'],
+    ml: ['0', '10px']
   },
   // glide slider nav controls style
   btnWrapperStyle: {
     position: 'absolute',
     bottom: '62px',
-    left: '12px',
+    left: '12px'
   },
   // next / prev btn style
   btnStyle: {
@@ -158,8 +158,8 @@ TestimonialSection.defaultProps = {
     minHeight: 'auto',
     mr: '13px',
     fontSize: '16px',
-    color: '#343d484d',
-  },
+    color: '#343d484d'
+  }
 };
 
 export default TestimonialSection;

@@ -29,7 +29,11 @@ const Logo = ({
     ) : (
       <>
         {logoSrc ? (
-          <Image src={logoSrc} alt={title} {...logoStyle} />
+          <NextLink href={'/'}>
+            <a>
+              <Image src={logoSrc} alt={title} {...logoStyle} />
+            </a>
+          </NextLink>
         ) : (
           <Text content={title} {...titleStyle} />
         )}

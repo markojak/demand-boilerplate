@@ -18,7 +18,7 @@ const BannerWrapper = styled.section`
 const CategoryMenuWrapper = styled.div`
   display: block;
   width: 100%;
-  border-top: 1px solid ${themeGet('colors.lightBorder', '#dedede')};
+  border-top: 1px solid ${themeGet('colors.inactiveIcon', '#dedede')};
   text-align: right;
 `;
 
