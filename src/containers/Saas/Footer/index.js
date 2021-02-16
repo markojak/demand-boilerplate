@@ -12,6 +12,7 @@ import Container from 'src/common/src/components/UI/Container';
 import FooterWrapper, { List, ListItem } from './footer.style';
 
 import LogoImage from 'src/common/src/assets/image/saas/logo.png';
+import SocialIcons from '../../../common/src/components/SocialIcons';
 
 //import { Footer_Data } from 'src/common/src/data/Saas';
 
@@ -23,7 +24,8 @@ const Footer = ({
   titleStyle,
   logoStyle,
   textStyle,
-  navigation
+  navigation,
+  socialIcons
 }) => {
   const footerNavigation = get(navigation, '[0].node.body', null);
   return (
@@ -39,6 +41,8 @@ const Footer = ({
             />
             <Text content="hello@redq.io" {...textStyle} />
             <Text content="+479-443-9334" {...textStyle} />
+
+            <SocialIcons socialIcons={socialIcons} />
           </Box>
           {/* End of footer logo column */}
           <Box {...colTwo}>
