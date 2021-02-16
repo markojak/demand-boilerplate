@@ -1,5 +1,8 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# Demand Boilerplate
+This is the v1 Release of the Boilerplate demand repository for testing ideas.
+Mostly what you need to hack together some things with basic functionality
 ## Getting Started
 
 First, run the development server:
