@@ -1,6 +1,8 @@
 import { get } from 'lodash';
 import { RichText } from 'prismic-reactjs';
+import { Markdown } from 'react-showdown';
 import { blogCategoryArticlesQuery } from './queries';
+import React from 'react';
 
 export async function fetchAPI(query) {
   const apiBaseUrl = process.env.apiBaseUrl;
@@ -96,4 +98,23 @@ export function prepareOpenGraphDataObject(page) {
     ];
   }
   return openGraphData;
+}
+
+export function prismicBodyToMarkdown(prismicBody) {
+  let contents = null;
+  if (!!prismicBody && prismicBody.length > 0) {
+    contents = prismicBody
+      .filter((content) => !!content.text)
+      .map((content, index) => {
+        return (
+          <Markdown
+            key={index}
+            markup={content.text}
+            options={{ simpleLineBreaks: true }}
+          />
+        );
+      });
+  }
+
+  return contents;
 }

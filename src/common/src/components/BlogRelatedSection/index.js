@@ -5,6 +5,7 @@ import Heading from '../Heading';
 import Text from '../Text';
 import Image from '../Image';
 import Link from 'next/link';
+import { prismicBodyToMarkdown } from '../../../../utils/utils';
 
 export default function BlogRelatedSection({ relatedArticles }) {
   return (
@@ -33,7 +34,7 @@ export default function BlogRelatedSection({ relatedArticles }) {
                   fontWeight={'400'}
                 />
                 <Text
-                  content={RichText.asText(node.preview)}
+                  content={prismicBodyToMarkdown(node.preview)}
                   lineHeight={1.2}
                   style={{ fontSize: 16 }}
                 />
