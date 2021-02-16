@@ -178,6 +178,7 @@ export default function BlogPost({
             navigation={navigations.filter(
               (nav) => nav.node.location === 'Footer'
             )}
+            socialIcons={socialIcons}
           />
         </ContentWrapper>
         {/* End of wrapper section */}
